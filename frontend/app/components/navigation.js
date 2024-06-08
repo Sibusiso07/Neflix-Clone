@@ -1,10 +1,21 @@
 "use client"
 
+// import packages
+import { useContext } from "react";
 import Link from "next/link"
 
+// Auth context
+import { AuthContext } from "../Context/AuthCont";
+
 export default function Navigation() {
+    // Hook auth context
+    const { user, setUser } = useContext(AuthContext);
+
+    console.log('user: ', user)
+
     const handleSignOut = () => {
-        window.location.href = '/';
+        // Clearing user context state
+       setUser(null);
     }
 
     return (
@@ -19,11 +30,12 @@ export default function Navigation() {
                     <Link href={'/MyList'} className="px-6 hover:text-gray-300">My List</Link>
                 </div>
                 <div className="absolute right-8 mr-8 mt-4">
-                    <button 
+                    <Link 
+                    href={'/'}
                     onClick={handleSignOut}
                     className="cursor-pointer text-red-600 text-xl">
                         Sign Out
-                    </button>
+                    </Link>
                 </div>
             </div>
         </nav>
