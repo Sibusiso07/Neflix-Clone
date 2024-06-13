@@ -4,10 +4,11 @@
 import { useEffect, useContext } from "react"
 
 // Components
-import Navigation from "../components/navigation"
-import Feature from "../components/feature"
-import ProtectedRoute from '../components/ProtectedRoute'
-import { AuthContext } from "../Context/AuthCont"
+import Navigation from "../components/navigation";
+import ProtectedRoute from '../components/ProtectedRoute';
+import { AuthContext } from "../Context/AuthCont";
+import Billboard from "../components/Billboard";
+import MovieList from "../components/MovieList";
 
 export default function() {
     // Hook context
@@ -21,7 +22,10 @@ export default function() {
         <ProtectedRoute>
             <div>
                 <Navigation />
-                <Feature />
+                <Billboard />
+                <div className="pb-40">
+                    <MovieList />
+                </div>
             </div>
         </ProtectedRoute>
     )

@@ -22,6 +22,7 @@ const db = new pg.Client({
 });
 db.connect();
 
+// Login
 router.post('/', async (req, res) => {
     const {user, password} = req.body;
     try {
@@ -29,6 +30,7 @@ router.post('/', async (req, res) => {
             user
         ]);
         try {
+            // Comparing passwords
             const match = await bcrypt.compare(password, response);
             if (match) {
                 res.status(200);
@@ -43,6 +45,7 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Registering a user
 router.post('/register', async (req, res) => {
     const {name, email, number, password} = req.body;
     const saltRounds = 10;
@@ -60,9 +63,29 @@ router.post('/register', async (req, res) => {
     } catch (err) {
         console.error('Error Hashing password: ', err)
     }
-})
+});
+
+// Fetching a random movie from the DB
+router.get('/billboard', async (req, res) => {
+    try {
+        const response = await db.query('SELECT * FROM "Movies" ORDER BY RANDOM() LIMIT 1;');
+        res.json(response.rows);
+    } catch (err) {
+        console.error('Error getting random movie from DB: ', err);
+    }
+});
+
+// Fetching 20 random movie from the DB
+router.get('/movieList', async (req, res) => {
+    try {
+        const response = await db.query('SELECT * FROM "Movies" ORDER BY RANDOM() LIMIT 20;');
+        res.json(response.rows);
+    } catch (err) {
+        console.error('Error fetching movies from DB: ', err);
+    }
+});
 
 const port = 3001
 router.listen(port, () => {
     console.log(`Server listing on ${port}`);
-})
+});

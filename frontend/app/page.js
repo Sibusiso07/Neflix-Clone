@@ -7,8 +7,8 @@ import Link from 'next/link'
 import { AuthContext } from './Context/AuthCont'
 
 export default function Login() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('sibu@email.com')
+  const [password, setPassword] = useState('test')
   const router = useRouter()
 
   // Hook auth context
