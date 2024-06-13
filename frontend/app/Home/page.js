@@ -23,9 +23,8 @@ export default function() {
             <div>
                 <Navigation />
                 <Billboard />
-                <div className="pb-40">
-                    <MovieList />
-                </div>
+                <h1>Movies</h1>
+                <MovieList />
             </div>
         </ProtectedRoute>
     )

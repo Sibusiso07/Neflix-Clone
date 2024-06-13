@@ -79,6 +79,7 @@ router.get('/billboard', async (req, res) => {
 router.get('/movieList', async (req, res) => {
     try {
         const response = await db.query('SELECT * FROM "Movies" ORDER BY RANDOM() LIMIT 20;');
+        // console.log("Movies >>> ", response.rows)
         res.json(response.rows);
     } catch (err) {
         console.error('Error fetching movies from DB: ', err);
